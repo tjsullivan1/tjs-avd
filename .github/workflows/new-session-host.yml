@@ -33,5 +33,7 @@ jobs:
       - name: Run a multi-line script
         shell: pwsh
         run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+          $gallery = "sigseaib"
+          $rg = "rg-images"
+          $def = "se-wvd"
+          Get-AzGalleryImageVersion -GalleryName $gallery -ResourceGroupName $rg -GalleryImageDefinitionName $def | select @{Name="Date";E={$_.PublishingProfile.PublishedDate}},Name | Sort-Object -Descending Date | select -First 1 -ExpandProperty Name
