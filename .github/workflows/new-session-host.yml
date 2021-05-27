@@ -32,9 +32,9 @@ jobs:
          creds: ${{ secrets.AZURE_CREDENTIALS_AIRS }}
          
       # Runs a set of commands using the runners shell
-      - name: Azure PowerShell Action
+      - name: Get Az Gallery Image Version
         uses: Azure/powershell@v1
         with:
           inlineScript: |
-            Get-AzGalleryImageVersion -GalleryName $SIG -ResourceGroupName $RESOURCE_GROUP -GalleryImageDefinitionName $IMAGE_DEFINITION | select @{Name="Date";E={$_.PublishingProfile.PublishedDate}},Name | Sort-Object -Descending Date | select -First 1 -ExpandProperty Name
+            Get-AzGalleryImageVersion -GalleryName $env:SIG -ResourceGroupName $env:RESOURCE_GROUP -GalleryImageDefinitionName $env:IMAGE_DEFINITION | select @{Name="Date";E={$_.PublishingProfile.PublishedDate}},Name | Sort-Object -Descending Date | select -First 1 -ExpandProperty Name
           azPSVersion: "latest"
