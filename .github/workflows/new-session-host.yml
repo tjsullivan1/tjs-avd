@@ -6,9 +6,9 @@ name: Create New Session Host
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
   push:
-    branches: [ main ]
+    branches: [ build-session-host ]
   pull_request:
-    branches: [ main ]
+    branches: [ build-session-host ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -35,12 +35,30 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Get Az Gallery Image Version
         uses: Azure/powershell@v1
+        env:
+          D_USER: ${{ secrets.DOMAINUSERNAME }}
+          D_PASSWORD: ${{ secrets.DOMAINPASSWORD }}
+          VM_USER: ${{ secrets.LOCALUSERNAME }}
+          VM_PASSWORD: ${{ secrets.LOCALPASSWORD }}
+          REG_TOKEN: ${{ secrets.REGISTRATIONINFOTOKEN }}
         with:
           inlineScript: |
             $SIG = $env:SIG 
             $rg = $env:RESOURCE_GROUP
             $image_def = $env:IMAGE_DEFINITION
+            $month_day = (get-date -F MMdd)
+            $deployment_name = "new-session-host-$month_day"
+            $vm_name = "se-sh-$month_day"
+            $template_file = "$GITHUB_WORKSPACE/session-host-creation/session-host.bicep"
+            $params_file = "$GITHUB_WORKSPACE/session-host-creation/session-host.params.json"
+            $session_host_rg = "rg-se-wvd"
 
             get-azcontext
-            Get-AzGalleryImageVersion -GalleryName $SIG -ResourceGroupName $rg -GalleryImageDefinitionName $image_def | select @{Name="Date";E={$_.PublishingProfile.PublishedDate}},Name | Sort-Object -Descending Date | select -First 1 -ExpandProperty Name
+            $image_ver = Get-AzGalleryImageVersion -GalleryName $SIG -ResourceGroupName $rg -GalleryImageDefinitionName $image_def | select @{Name="Date";E={$_.PublishingProfile.PublishedDate}},Name | Sort-Object -Descending Date | select -First 1 -ExpandProperty Name
+            New-AzResourceGroupDeployment -name $deployment_name -ResourceGroupName $session_host_rg -TemplateFile $template_file -TemplateParameterFile $params_file `
+              -domainUsername $env:D_USER -domainPassword $env:D_PASSWORD -vmAdminUsername $env:VM_USER -vmAdminPassword $env:VM_PASSWORD -dnsLabelPrefix $vm_name `
+              -registrationInfoToken $env:REG_TOKEN -galleryImageVersionName $image_ver
           azPSVersion: "latest"
+
+
+           
