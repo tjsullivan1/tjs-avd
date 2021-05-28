@@ -1,0 +1,33 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+      "existingVNETName": {
+        "value": "vnet-se-wvd-eus"
+      },
+      "existingSubnetName": {
+        "value": "snet-default"
+      },
+      "vmSize": {
+        "value": "Standard_B4ms"
+      },
+      "domainToJoin": {
+        "value": "sullivanenterprises.org"
+      },
+      "domainJoinOptions": {
+        "value": 3
+      },
+      "galleryName": {
+        "value": "sigseaib"
+      },
+      "galleryImageDefinitionName": {
+        "value": "se-wvd"
+      },
+      "ouPath": {
+        "value": "OU=WVDSessionHosts,OU=CIT,DC=sullivanenterprises,DC=org"
+      },
+      "hostPool": {
+         "value": "airs-hp"
+      }
+    }
+  }
