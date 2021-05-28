@@ -29,7 +29,8 @@ jobs:
 
       - uses: azure/login@v1
         with:
-         creds: ${{ secrets.AZURE_CREDENTIALS_AIRS }}
+          creds: ${{ secrets.AZURE_CREDENTIALS_AIRS }}
+          enable-AzPSSession: true 
          
       # Runs a set of commands using the runners shell
       - name: Get Az Gallery Image Version
