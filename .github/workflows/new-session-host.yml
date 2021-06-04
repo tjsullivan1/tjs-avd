@@ -35,17 +35,6 @@ jobs:
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS_AIRS }}
           enable-AzPSSession: true 
-
-      # - name: Install Bicep
-      #   uses: azure/CLI@v1
-      #   with:
-      #     azcliversion: 'latest'
-      #     inlineScript: |
-      #       az bicep install
-
-      #       echo $PATH
-      #       export PATH=/home/runner/.azure/bin/:$PATH
-      #       echo $PATH  
       
       - name: Get Az Gallery Image Version & Deploy Host
         shell: pwsh
@@ -68,7 +57,7 @@ jobs:
 
           $image_ver = az sig image-version list -g $rg -r $SIG -i $image_def --query "[].[name]" -o tsv | sort -r | head -n 1
 
-          az deployment group create --name $deployment_name --resource-group $session_host_rg --template-file $template_file --parameters $params_file registrationInfoToken=$env:REG_TOKEN galleryImageVersionName=$image_ver domainUsername=$env:D_USER domainPassword=$env:D_PASSWORD vmAdminUsername=$env:VM_USER vmAdminPassword=$env:VM_PASSWORD dnsLabelPrefix=$vm_name 
+          az deployment group create --resource-group $session_host_rg --template-file $template_file --parameters $params_file --parameters registrationInfoToken=$env:REG_TOKEN galleryImageVersionName=$image_ver domainUsername=$env:D_USER domainPassword=$env:D_PASSWORD vmAdminUsername=$env:VM_USER vmAdminPassword=$env:VM_PASSWORD dnsLabelPrefix=$vm_name --name $deployment_name
 
 
            
