@@ -62,9 +62,9 @@ jobs:
 
             az bicep install
 
-            echo $env:Path
-            $env:Path += ";/home/runner/.azure/bin/"
-            echo $env:Path
+            echo $PATH
+            export PATH=/home/runner/.azure/bin/:$PATH
+            echo $PATH
 
             get-azcontext
             $image_ver = Get-AzGalleryImageVersion -GalleryName $SIG -ResourceGroupName $rg -GalleryImageDefinitionName $image_def | select @{Name="Date";E={$_.PublishingProfile.PublishedDate}},Name | Sort-Object -Descending Date | select -First 1 -ExpandProperty Name
