@@ -49,8 +49,8 @@ jobs:
             $month_day = (get-date -F MMdd)
             $deployment_name = "new-session-host-$month_day"
             $vm_name = "se-sh-$month_day"
-            $template_file = "$GITHUB_WORKSPACE/session-host-creation/session-host.bicep"
-            $params_file = "$GITHUB_WORKSPACE/session-host-creation/session-host.params.json"
+            $template_file = "session-host-creation/session-host.bicep"
+            $params_file = "session-host-creation/session-host.params.json"
             $session_host_rg = "rg-se-wvd"
 
             get-azcontext
