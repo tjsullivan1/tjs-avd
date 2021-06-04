@@ -32,12 +32,16 @@ jobs:
           creds: ${{ secrets.AZURE_CREDENTIALS_AIRS }}
           enable-AzPSSession: true 
 
-      # - name: Azure CLI script
-      #   uses: azure/CLI@v1
-      #   with:
-      #     azcliversion: 'latest'
-      #     inlineScript: |
-      #       az bicep install      
+      - name: Azure CLI script
+        uses: azure/CLI@v1
+        with:
+          azcliversion: 'latest'
+          inlineScript: |
+            az bicep install
+
+            echo $PATH
+            export PATH=/home/runner/.azure/bin/:$PATH
+            echo $PATH  
 
       # Runs a set of commands using the runners shell
       - name: Get Az Gallery Image Version
@@ -59,12 +63,6 @@ jobs:
             $template_file = "session-host-creation/session-host.bicep"
             $params_file = "session-host-creation/session-host.params.json"
             $session_host_rg = "rg-se-wvd"
-
-            az bicep install
-
-            echo $PATH
-            export PATH=/home/runner/.azure/bin/:$PATH
-            echo $PATH
 
             get-azcontext
             $image_ver = Get-AzGalleryImageVersion -GalleryName $SIG -ResourceGroupName $rg -GalleryImageDefinitionName $image_def | select @{Name="Date";E={$_.PublishingProfile.PublishedDate}},Name | Sort-Object -Descending Date | select -First 1 -ExpandProperty Name
