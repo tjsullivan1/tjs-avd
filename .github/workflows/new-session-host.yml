@@ -96,9 +96,11 @@ jobs:
 
           get-azcontext
           $image_ver = Get-AzGalleryImageVersion -GalleryName $SIG -ResourceGroupName $rg -GalleryImageDefinitionName $image_def | select @{Name="Date";E={$_.PublishingProfile.PublishedDate}},Name | Sort-Object -Descending Date | select -First 1 -ExpandProperty Name
-          New-AzResourceGroupDeployment -name $deployment_name -ResourceGroupName $session_host_rg -TemplateFile $template_file -TemplateParameterFile $params_file `
-            -domainUsername $env:D_USER -domainPassword $env:D_PASSWORD -vmAdminUsername $env:VM_USER -vmAdminPassword $env:VM_PASSWORD -dnsLabelPrefix $vm_name `
-            -registrationInfoToken $env:REG_TOKEN -galleryImageVersionName $image_ver
+          # New-AzResourceGroupDeployment -name $deployment_name -ResourceGroupName $session_host_rg -TemplateFile $template_file -TemplateParameterFile $params_file `
+          #   -domainUsername $env:D_USER -domainPassword $env:D_PASSWORD -vmAdminUsername $env:VM_USER -vmAdminPassword $env:VM_PASSWORD -dnsLabelPrefix $vm_name `
+          #   -registrationInfoToken $env:REG_TOKEN -galleryImageVersionName $image_ver
+
+          az deployment group create --name $deployment_name --resource-group $session_host_rg --template-file $template_file --parameters $params_file registrationInfoToken=$env:REG_TOKEN galleryImageVersionName=$image_ver domainUsername=$env:D_USER domainPassword=$env:D_PASSWORD vmAdminUsername=$env:VM_USER vmAdminPassword=$env:VM_PASSWORD dnsLabelPrefix=$vm_name 
 
 
            
