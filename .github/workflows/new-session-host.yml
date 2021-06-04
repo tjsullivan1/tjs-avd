@@ -57,7 +57,7 @@ jobs:
 
           $image_ver = az sig image-version list -g $rg -r $SIG -i $image_def --query "[].[name]" -o tsv | sort -r | head -n 1
 
-          az deployment group create --resource-group $session_host_rg --template-file $template_file --parameters $params_file --parameters registrationInfoToken=$env:REG_TOKEN galleryImageVersionName=$image_ver domainUsername=$env:D_USER domainPassword=$env:D_PASSWORD vmAdminUsername=$env:VM_USER vmAdminPassword=$env:VM_PASSWORD dnsLabelPrefix=$vm_name --name $deployment_name
+          az deployment group create --resource-group $session_host_rg --template-file $template_file --parameters $params_file --parameters registrationInfoToken=$env:REG_TOKEN galleryImageVersionName=$image_ver domainUsername=$env:D_USER domainPassword=$env:D_PASSWORD dnsLabelPrefix=$vm_name vmAdminUsername=$env:VM_USER vmAdminPassword=$env:VM_PASSWORD --name $deployment_name
 
 
            
