@@ -60,7 +60,11 @@ jobs:
             $params_file = "session-host-creation/session-host.params.json"
             $session_host_rg = "rg-se-wvd"
 
-            az bicep install  
+            az bicep install
+
+            echo $env:Path
+            $env:Path += ";/home/runner/.azure/bin/"
+            echo $env:Path
 
             get-azcontext
             $image_ver = Get-AzGalleryImageVersion -GalleryName $SIG -ResourceGroupName $rg -GalleryImageDefinitionName $image_def | select @{Name="Date";E={$_.PublishingProfile.PublishedDate}},Name | Sort-Object -Descending Date | select -First 1 -ExpandProperty Name
