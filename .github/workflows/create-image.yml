@@ -30,7 +30,7 @@ jobs:
       - name: Login via Az module
         uses: azure/login@v1
         with:
-          creds: ${{secrets.AZURE_CREDENTIALS}}
+          creds: ${{secrets.AZURE_CREDENTIALS_AIRS}}
           enable-AzPSSession: true 
 
       # Runs a set of commands using the runners shell
