@@ -48,6 +48,7 @@ jobs:
         run: |
           $SIG = $env:SIG 
           $rg = $env:RESOURCE_GROUP
+          $storage = $env:STORAGE
           $image_def = $env:IMAGE_DEFINITION
           $month_day = (get-date -F MMdd)
           $deployment_name = "new-session-host-$month_day"
@@ -56,9 +57,13 @@ jobs:
           $params_file = "session-host-creation/session-host.params.json"
           $session_host_rg = "rg-se-wvd"
 
+          echo $month_day
+          echo $deployment_name
+          echo $storage
+
           $image_ver = az sig image-version list -g $rg -r $SIG -i $image_def --query "[].[name]" -o tsv | sort -r | head -n 1
 
-          az deployment group create --resource-group $session_host_rg --template-file $template_file --parameters $params_file --parameters registrationInfoToken=$env:REG_TOKEN galleryImageVersionName=$image_ver domainUsername=$env:D_USER domainPassword=$env:D_PASSWORD dnsLabelPrefix=$vm_name vmAdminUsername=$env:VM_USER vmAdminPassword=$env:VM_PASSWORD bootStorageURI=$env:STORAGE --name $deployment_name
+          az deployment group create --resource-group $session_host_rg --template-file $template_file --parameters $params_file --parameters registrationInfoToken=$env:REG_TOKEN galleryImageVersionName=$image_ver domainUsername=$env:D_USER domainPassword=$env:D_PASSWORD dnsLabelPrefix=$vm_name vmAdminUsername=$env:VM_USER bootStorageURI=$storage vmAdminPassword=$env:VM_PASSWORD --name $deployment_name
 
 
            
