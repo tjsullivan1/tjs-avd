@@ -43,7 +43,7 @@ jobs:
           D_PASSWORD: ${{ secrets.DOMAINPASSWORD }}
           VM_USER: ${{ secrets.LOCALUSERNAME }}
           VM_PASSWORD: ${{ secrets.LOCALPASSWORD }}
-          STORAGE: ${{ secretes.BOOT_STORAGE_URI }}
+          STORAGE: ${{ secrets.BOOT_STORAGE_URI }}
           REG_TOKEN: ${{ secrets.REGISTRATIONINFOTOKEN }}
         run: |
           $SIG = $env:SIG 
