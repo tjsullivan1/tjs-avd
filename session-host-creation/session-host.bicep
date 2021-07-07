@@ -51,6 +51,9 @@ param galleryImageDefinitionName string
 @description('Name of the Image Version - should follow <MajorVersion>.<MinorVersion>.<Patch>.')
 param galleryImageVersionName string
 
+@description('URI of the storage account where we are going to store our boot diagnostics')
+param bootStorageURI string
+
 var nicName_var = '${dnsLabelPrefix}Nic'
 var networkSecurityGroupName_var = 'nsg-${dnsLabelPrefix}'
 var subnetId = resourceId(resourceGroup().name, 'Microsoft.Network/virtualNetworks/subnets', existingVNETName, existingSubnetName)
@@ -128,7 +131,8 @@ resource dnsLabelPrefix_resource 'Microsoft.Compute/virtualMachines@2019-07-01' 
     }
     diagnosticsProfile: {
       bootDiagnostics: {
-         enabled: true
+        enabled: true
+        storageUri: bootStorageURI
       }
     }
     licenseType: 'Windows_Client'
