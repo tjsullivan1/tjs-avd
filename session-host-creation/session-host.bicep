@@ -126,7 +126,11 @@ resource dnsLabelPrefix_resource 'Microsoft.Compute/virtualMachines@2019-07-01' 
         }
       ]
     }
-    diagnosticsProfile: {}
+    diagnosticsProfile: {
+      bootDiagnostics: {
+         enabled: true
+      }
+    }
     licenseType: 'Windows_Client'
   }
 }
