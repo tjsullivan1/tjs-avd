@@ -49,4 +49,5 @@ jobs:
           token=`az desktopvirtualization hostpool update --registration-info expiration-time=$expiry registration-token-operation="Update" --name $hp --resource-group $rg --query registrationInfo.token --output tsv --only-show-errors`
 
           gh secret set REGISTRATIONINFOTOKEN -b $token
-           
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}} 
