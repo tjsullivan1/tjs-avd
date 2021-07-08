@@ -47,7 +47,7 @@ jobs:
           REG_TOKEN: ${{ secrets.REGISTRATIONINFOTOKEN }}
         run: |
           $SIG = $env:SIG 
-          $rg = $env:RESOURCE_GROUP
+          $rg = $env:RESOURCE_GROUP.toLower()
           $storage = $env:STORAGE
           $image_def = $env:IMAGE_DEFINITION
           $month_day = (get-date -F MMdd)
