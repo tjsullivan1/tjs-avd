@@ -38,10 +38,10 @@ jobs:
           enable-AzPSSession: true 
       
       - name: Get Date and Update Registration Token
-        shell: pwsh
+        shell: bash
         run: |
-          $hp = $env:HOST_POOL.toLower() 
-          $rg = $env:RESOURCE_GROUP.toLower()
+          hp=$HOST_POOL
+          rg=$RESOURCE_GROUP
 
           expiry=`date --date='27 days' -Ins`
 
