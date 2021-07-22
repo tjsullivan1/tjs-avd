@@ -102,7 +102,7 @@
                         "type": "PowerShell",
                         "name": "Install Packages (not choco)",
                         "runElevated": true,
-                        "runAsSystem": true,
+                        "runAsSystem": false,
                         "scriptUri": "https://raw.githubusercontent.com/tjsullivan1/tjs-scripts/master/PowerShell/New-WinTerminalInstall.ps1"
                     },
                     {
