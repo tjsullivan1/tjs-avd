@@ -24,8 +24,8 @@ jobs:
   runscript:
     runs-on: ubuntu-latest
     env:
-      HOST_POOL: airs-hp
-      RESOURCE_GROUP: rg-wvd-ws
+      HOST_POOL: se-hp
+      RESOURCE_GROUP: rg-se-wvd
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
