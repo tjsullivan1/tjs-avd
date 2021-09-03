@@ -1,0 +1,53 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Update Registration Token
+
+# Controls when the action will run. 
+on:
+  # Triggers the workflow on push or pull request events but only for the main branch
+  push:
+    branches: [ main ]
+    paths:
+      - .github/workflows/update-registration-token.yml
+  pull_request:
+    branches: [ main ]
+    paths:
+      - .github/workflows/update-registration-token.yml
+  schedule:
+    - cron: '5 0 * * 0'  # every Sunday at 5 past midnight
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  runscript:
+    runs-on: ubuntu-latest
+    env:
+      HOST_POOL: airs-hp
+      RESOURCE_GROUP: rg-wvd-ws
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+
+      - uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS_VSE }}
+          enable-AzPSSession: true 
+      
+      - name: Get Date and Update Registration Token
+        shell: bash
+        run: |
+          hp=$HOST_POOL
+          rg=$RESOURCE_GROUP
+
+          az config set extension.use_dynamic_install=yes_without_prompt
+
+          expiry=`date --date='27 days' -Ins`
+
+          token=`az desktopvirtualization hostpool update --registration-info expiration-time=$expiry registration-token-operation="Update" --name $hp --resource-group $rg --query registrationInfo.token --output tsv --only-show-errors`
+
+          gh secret set REGISTRATIONINFOTOKEN -b $token
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT }} 
