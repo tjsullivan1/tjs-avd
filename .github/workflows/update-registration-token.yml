@@ -42,6 +42,7 @@ jobs:
           hp=$HOST_POOL
           rg=$RESOURCE_GROUP
 
+          az account set -s 'Management'
           az config set extension.use_dynamic_install=yes_without_prompt
 
           expiry=`date --date='27 days' -Ins`
