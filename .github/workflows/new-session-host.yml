@@ -50,9 +50,10 @@ jobs:
           $rg = $env:RESOURCE_GROUP.toLower()
           $storage = $env:STORAGE
           $image_def = $env:IMAGE_DEFINITION
+          $rand = (65..90) + (97..122) | Get-Random -Count 5 | % { [char]$_ } | join-string 
           $month_day = (get-date -F MMdd)
-          $deployment_name = "new-session-host-$month_day"
-          $vm_name = "se-sh-$month_day"
+          $deployment_name = "new-session-host-$month_day-$rand"
+          $vm_name = "se-sh-$month_day-$rand"
           $template_file = "session-host-creation/session-host.bicep"
           $params_file = "session-host-creation/session-host.params.json"
           $session_host_rg = "rg-se-wvd"
