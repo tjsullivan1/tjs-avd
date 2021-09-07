@@ -54,6 +54,12 @@ jobs:
         with:
           creds: ${{secrets.AZURE_CREDENTIALS_AIRS}}
           enable-AzPSSession: true 
+      - name: Install Az Image Builder Module
+        uses: azure/powershell@v1
+        with:
+          inlineScript: |
+            Install-Module Az.ImageBuilder
+          azPSVersion: "latest"
       - name: Delete old image versions and templates
         uses: azure/powershell@v1
         with:
