@@ -9,7 +9,7 @@
         "value": "snet-default"
       },
       "vmSize": {
-        "value": "Standard_B4ms"
+        "value": "Standard_D4_v3"
       },
       "domainToJoin": {
         "value": "sullivanenterprises.org"
@@ -27,7 +27,7 @@
         "value": "OU=WVDSessionHosts,OU=CIT,DC=sullivanenterprises,DC=org"
       },
       "hostPool": {
-         "value": "airs-hp"
+         "value": "se-hp"
       }
     }
   }
