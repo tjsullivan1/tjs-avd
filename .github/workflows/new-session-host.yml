@@ -50,7 +50,7 @@ jobs:
           $rg = $env:RESOURCE_GROUP.toLower()
           $storage = $env:STORAGE
           $image_def = $env:IMAGE_DEFINITION
-          $rand = (65..90) + (97..122) | Get-Random -Count 5 | % { [char]$_ } | join-string 
+          $rand = ((65..90) + (97..122) | Get-Random -Count 2 | % { [char]$_ } | join-string ).toLower()
           $month_day = (get-date -F MMdd)
           $deployment_name = "new-session-host-$month_day-$rand"
           $vm_name = "se-sh-$month_day-$rand"
