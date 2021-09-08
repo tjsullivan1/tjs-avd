@@ -58,7 +58,7 @@ jobs:
         uses: azure/powershell@v1
         with:
           inlineScript: |
-            Install-Module Az.ImageBuilder
+            Install-Module Az.ImageBuilder -Force
           azPSVersion: "latest"
       - name: Delete old image versions and templates
         uses: azure/powershell@v1
