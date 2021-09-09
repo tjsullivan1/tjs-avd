@@ -56,7 +56,9 @@ jobs:
           $vm_name = "se-sh-$month_day-$rand"
           $template_file = "session-host-creation/session-host.bicep"
           $params_file = "session-host-creation/session-host.params.json"
-          $session_host_rg = "rg-se-wvd"
+          $session_host_rg = "rg-se-wvd-$month_day-$rand"
+
+          az group create --name $session_host_rg --location eastus
 
           echo $month_day
           echo $deployment_name
