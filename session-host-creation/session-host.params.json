@@ -8,6 +8,9 @@
       "existingSubnetName": {
         "value": "snet-default"
       },
+      "existingVnetResourceGroup": {
+        "value": "rg-se-wvd"
+      },
       "vmSize": {
         "value": "Standard_D4_v3"
       },

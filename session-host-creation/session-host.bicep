@@ -4,6 +4,9 @@ param existingVNETName string
 @description('Existing subnet that contains the domain controller')
 param existingSubnetName string
 
+@description('Existing subnet that contains the domain controller')
+param existingVnetResourceGroup string
+
 @description('Unique public DNS prefix for the deployment. The fqdn will look something like \'<dnsname>.westus.cloudapp.azure.com\'. Up to 62 chars, digits or dashes, lowercase, should start with a letter: must conform to \'^[a-z][a-z0-9-]{1,61}[a-z0-9]$\'.')
 param dnsLabelPrefix string
 
@@ -56,7 +59,7 @@ param bootStorageURI string
 
 var nicName_var = '${dnsLabelPrefix}Nic'
 var networkSecurityGroupName_var = 'nsg-${dnsLabelPrefix}'
-var subnetId = resourceId(resourceGroup().name, 'Microsoft.Network/virtualNetworks/subnets', existingVNETName, existingSubnetName)
+var subnetId = resourceId(existingVnetResourceGroup, 'Microsoft.Network/virtualNetworks/subnets', existingVNETName, existingSubnetName)
 
 resource nicName 'Microsoft.Network/networkInterfaces@2020-08-01' = {
   name: nicName_var
