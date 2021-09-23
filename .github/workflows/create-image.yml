@@ -42,6 +42,7 @@ jobs:
           azPSVersion: "latest"
   
   cleanup:
+    needs: build
     if: ${{ github.event_name	 == 'schedule'}} # I only want this to run if it is started by schedule
     runs-on: ubuntu-latest
     env:
