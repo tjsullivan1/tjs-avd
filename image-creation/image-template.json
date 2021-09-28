@@ -6,7 +6,8 @@
         "type": "string"
         },
         "api-version": {
-          "type": "string"
+          "type": "string",
+          "defaultValue": "2020-02-14"
         },
         "svclocation": {
             "type": "string"
