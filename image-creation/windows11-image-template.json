@@ -18,7 +18,7 @@
         },
         "sigId": {
             "type": "string",
-            "defaultValue": "/subscriptions/8b63fe10-d76a-4f8f-81ce-7a5a8b911779/resourceGroups/rg-images/providers/Microsoft.Compute/galleries/sigseaib/images/se-wvd"
+            "defaultValue": "/subscriptions/8b63fe10-d76a-4f8f-81ce-7a5a8b911779/resourceGroups/rg-images/providers/Microsoft.Compute/galleries/sigseaib/images/se-wvd-11"
         }
     },
     
