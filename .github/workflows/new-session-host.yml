@@ -40,7 +40,7 @@ jobs:
         run: |
           $SIG = $env:SIG 
           $rg = $env:RESOURCE_GROUP.toLower()
-          $storage = $env:STORAGE
+          $storage = $env:STORAGE.replace('core.windows.net','')
           $image_def = $env:IMAGE_DEFINITION
           $rand = ((65..90) + (97..122) | Get-Random -Count 2 | % { [char]$_ } | join-string ).toLower()
           $month_day = (get-date -F MMdd)

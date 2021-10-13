@@ -55,8 +55,9 @@ param galleryImageDefinitionName string
 param galleryImageVersionName string
 
 @description('URI of the storage account where we are going to store our boot diagnostics')
-param bootStorageURI string
+param bootStorageName string
 
+var bootStorageURI = '${bootStorageName}.${environment().suffixes.storage}'
 var nicName_var = '${dnsLabelPrefix}Nic'
 var networkSecurityGroupName_var = 'nsg-${dnsLabelPrefix}'
 var subnetId = resourceId(existingVnetResourceGroup, 'Microsoft.Network/virtualNetworks/subnets', existingVNETName, existingSubnetName)
