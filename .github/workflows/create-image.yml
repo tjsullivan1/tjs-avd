@@ -59,8 +59,9 @@ jobs:
         uses: azure/powershell@v1
         with:
           inlineScript: |
-            $imageTemplateName = "se-wvd-11-" + (Get-Date -Format yyyyMMddHHmm)     
-            ./image-creation/new-image.ps1 -templateFilePath './image-creation/windows11-image-template.json' -imageTemplateName $imageTemplateName 
+            $imageTemplateName = "se-wvd-11-" + (Get-Date -Format yyyyMMddHHmm)
+            $sigId = " /subscriptions/8b63fe10-d76a-4f8f-81ce-7a5a8b911779/resourceGroups/rg-images/providers/Microsoft.Compute/galleries/sigseaib/images/se-wvd-11"    
+            ./image-creation/new-image.ps1 -templateFilePath './image-creation/windows11-image-template.json' -imageTemplateName $imageTemplateName -sigId $sigId
           azPSVersion: "latest"
 
   cleanup:
