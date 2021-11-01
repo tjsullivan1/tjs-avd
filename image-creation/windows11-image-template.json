@@ -79,20 +79,19 @@
                         "type": "WindowsRestart",
                         "restartCheckCommand": "echo Azure-Image-Builder-Restarted-the-VM post optimizations",
                         "restartTimeout": "5m"
-                    }
-                    //},
-                    // {
-                    //     "type": "PowerShell",
-                    //     "name": "Install Chocolatey",
-                    //     "runElevated": true,
-                    //     "runAsSystem": true,
-                    //     "scriptUri": "https://raw.githubusercontent.com/tjsullivan1/tjs-scripts/master/PowerShell/new-chocoinstall.ps1"
-                    // },
-                    // {
-                    //     "type": "WindowsRestart",
-                    //     "restartCheckCommand": "echo Azure-Image-Builder-Restarted-the-VM - post choco install",
-                    //     "restartTimeout": "5m"
-                    // },
+                    },
+                    {
+                        "type": "PowerShell",
+                        "name": "Install Chocolatey",
+                        "runElevated": true,
+                        "runAsSystem": true,
+                        "scriptUri": "https://raw.githubusercontent.com/tjsullivan1/tjs-scripts/master/PowerShell/new-chocoinstall.ps1"
+                    },
+                    {
+                        "type": "WindowsRestart",
+                        "restartCheckCommand": "echo Azure-Image-Builder-Restarted-the-VM - post choco install",
+                        "restartTimeout": "5m"
+                    }//,
                     // {
                     //     "type": "PowerShell",
                     //     "name": "Install Packages",
