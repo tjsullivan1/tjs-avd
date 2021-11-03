@@ -106,11 +106,11 @@
                     //     "runAsSystem": false,
                     //     "scriptUri": "https://raw.githubusercontent.com/tjsullivan1/tjs-scripts/master/PowerShell/New-WinTerminalInstall.ps1"
                     // },
-                    {
-                        "type": "WindowsRestart",
-                        "restartCheckCommand": "echo Azure-Image-Builder-Restarted-the-VM - post onedrive fix",
-                        "restartTimeout": "5m"
-                    },
+                    // {
+                    //     "type": "WindowsRestart",
+                    //     "restartCheckCommand": "echo Azure-Image-Builder-Restarted-the-VM - post onedrive fix",
+                    //     "restartTimeout": "5m"
+                    // },
                     {
                         "type": "WindowsUpdate",
                         "searchCriteria": "IsInstalled=0",
@@ -120,20 +120,20 @@
                                     ],
                         "updateLimit": 40
                     },
-                    {
-                        "type": "PowerShell",
-                        "name": "Import Certificates for App Attach",
-                        "runElevated": true,
-                        "runAsSystem": true,
-                        "scriptUri": "https://raw.githubusercontent.com/tjsullivan1/tjs-scripts/master/PowerShell/Install-AppAttachCerts.ps1"
-                    },  
-                    {
-                        "type": "PowerShell",
-                        "name": "Fix OneDrive Install",
-                        "runElevated": true,
-                        "runAsSystem": true,
-                        "scriptUri": "https://raw.githubusercontent.com/tjsullivan1/tjs-scripts/master/PowerShell/New-WVDOneDriveInstall.ps1"
-                    },
+                    // {
+                    //     "type": "PowerShell",
+                    //     "name": "Import Certificates for App Attach",
+                    //     "runElevated": true,
+                    //     "runAsSystem": true,
+                    //     "scriptUri": "https://raw.githubusercontent.com/tjsullivan1/tjs-scripts/master/PowerShell/Install-AppAttachCerts.ps1"
+                    // },  
+                    // {
+                    //     "type": "PowerShell",
+                    //     "name": "Fix OneDrive Install",
+                    //     "runElevated": true,
+                    //     "runAsSystem": true,
+                    //     "scriptUri": "https://raw.githubusercontent.com/tjsullivan1/tjs-scripts/master/PowerShell/New-WVDOneDriveInstall.ps1"
+                    // },
                     {
                         "type": "WindowsRestart",
                         "restartCheckCommand": "echo Azure-Image-Builder-Restarted-the-VM - post onedrive fix",
