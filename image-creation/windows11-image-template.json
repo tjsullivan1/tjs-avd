@@ -92,6 +92,25 @@
                         "restartCheckCommand": "echo Azure-Image-Builder-Restarted-the-VM - post choco install",
                         "restartTimeout": "5m"
                     },
+                    { 
+                        "type": "PowerShell", 
+                        "name": "Choco Auto-Confirmation", 
+                        "inline": [
+                            "write-host 'Started the software installation script using Chocolatey'",
+                            "choco feature enable -n allowGlobalConfirmation",
+                        ],
+                        "runElevated": true,
+                        "runAsSystem": true
+                    },
+                    { 
+                        "type": "PowerShell", 
+                        "name": "Install Python", 
+                        "inline": [
+                            "choco install --no-progress python"
+                        ],
+                        "runElevated": true,
+                        "runAsSystem": true
+                    },
                     // {
                     //     "type": "PowerShell",
                     //     "name": "Install Packages",
