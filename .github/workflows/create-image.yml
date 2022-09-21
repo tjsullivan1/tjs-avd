@@ -41,28 +41,28 @@ jobs:
             ./image-creation/new-image.ps1
           azPSVersion: "latest"
 
-  build_win11:
-    # The type of runner that the job will run on
-    runs-on: ubuntu-latest
+  # build_win11:
+  #   # The type of runner that the job will run on
+  #   runs-on: ubuntu-latest
 
-    steps:
-      - uses: actions/checkout@v2
+  #   steps:
+  #     - uses: actions/checkout@v2
       
-      - name: Login via Az module
-        uses: azure/login@v1
-        with:
-          creds: ${{secrets.AZURE_CREDENTIALS_AIRS}}
-          enable-AzPSSession: true 
+  #     - name: Login via Az module
+  #       uses: azure/login@v1
+  #       with:
+  #         creds: ${{secrets.AZURE_CREDENTIALS_AIRS}}
+  #         enable-AzPSSession: true 
 
-      # Runs a set of commands using the runners shell
-      - name: Create a new image with Azure Image Builder
-        uses: azure/powershell@v1
-        with:
-          inlineScript: |
-            $imageTemplateName = "se-wvd-11-" + (Get-Date -Format yyyyMMddHHmm)
-            $sigId = " /subscriptions/8b63fe10-d76a-4f8f-81ce-7a5a8b911779/resourceGroups/rg-images/providers/Microsoft.Compute/galleries/sigseaib/images/se-wvd-11"    
-            ./image-creation/new-image.ps1 -templateFilePath './image-creation/windows11-image-template.json' -imageTemplateName $imageTemplateName -sigId $sigId
-          azPSVersion: "latest"
+  #     # Runs a set of commands using the runners shell
+  #     - name: Create a new image with Azure Image Builder
+  #       uses: azure/powershell@v1
+  #       with:
+  #         inlineScript: |
+  #           $imageTemplateName = "se-wvd-11-" + (Get-Date -Format yyyyMMddHHmm)
+  #           $sigId = " /subscriptions/8b63fe10-d76a-4f8f-81ce-7a5a8b911779/resourceGroups/rg-images/providers/Microsoft.Compute/galleries/sigseaib/images/se-wvd-11"    
+  #           ./image-creation/new-image.ps1 -templateFilePath './image-creation/windows11-image-template.json' -imageTemplateName $imageTemplateName -sigId $sigId
+  #         azPSVersion: "latest"
 
   cleanup:
     needs: build_win10
