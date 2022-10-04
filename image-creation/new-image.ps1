@@ -25,5 +25,7 @@ $params = @{
 
 New-AzResourceGroupDeployment -ResourceGroupName $imageResourceGroup -TemplateFile $templateFilePath -TemplateParameterObject $params
 
+sleep 60
+
 az image builder run --name $imageTemplateName --resource-group $imageResourceGroup --no-wait
 # Start-AzImageBuilderTemplate -ResourceGroupName $imageResourceGroup -Name $imageTemplateName  -NoWait
