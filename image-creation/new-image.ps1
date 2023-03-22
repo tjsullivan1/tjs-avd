@@ -2,8 +2,8 @@
 param (
     $imageResourceGroup = 'rg-images',
     $location = 'eastus',
-    $templateFilePath = './image-creation/image-template.json',
-    $imageTemplateName = "se-wvd-" + (Get-Date -Format yyyyMMddHHmm),
+    $templateFilePath = './windows11-image-template.json',
+    $imageTemplateName = "se-avd-win11-" + (Get-Date -Format yyyyMMddHHmm),
     $sigId
 )
 

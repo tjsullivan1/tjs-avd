@@ -7,18 +7,18 @@
         },
         "api-version": {
           "type": "string",
-          "defaultValue": "2020-02-14"
+          "defaultValue": "2022-02-14"
         },
         "svclocation": {
             "type": "string"
         },
         "userIdentity": {
             "type": "string",
-            "defaultValue": "/subscriptions/8b63fe10-d76a-4f8f-81ce-7a5a8b911779/resourcegroups/rg-images/providers/Microsoft.ManagedIdentity/userAssignedIdentities/aibIdentity1615322949"
+            "defaultValue": "/subscriptions/9dc23aa2-5815-46a5-9303-9aa5847aaf13/resourcegroups/rg-images/providers/Microsoft.ManagedIdentity/userAssignedIdentities/aibIdentity1673299667"
         },
-        "sigId": {
+        "acgId": {
             "type": "string",
-            "defaultValue": "/subscriptions/8b63fe10-d76a-4f8f-81ce-7a5a8b911779/resourceGroups/rg-images/providers/Microsoft.Compute/galleries/sigseaib/images/se-wvd-11"
+            "defaultValue": "/subscriptions/9dc23aa2-5815-46a5-9303-9aa5847aaf13/resourceGroups/rg-images/providers/Microsoft.Compute/galleries/acg01/images/windows11-o365"
         }
     },
     
@@ -57,17 +57,17 @@
                 "type": "PlatformImage",
                     "publisher": "MicrosoftWindowsDesktop",
                     "offer": "office-365",
-                    "sku": "win11-21h2-avd-m365",
-                    "version": "22000.258.2110120753"
+                    "sku": "win11-22h2-avd-m365",
+                    "version": "latest"
             },
             "customize": [
-                    {
-                        "type": "PowerShell",
-                        "name": "installFsLogix",
-                        "runElevated": true,
-                        "runAsSystem": true,
-                        "scriptUri": "https://raw.githubusercontent.com/tjsullivan1/tjs-scripts/master/PowerShell/Set-FsLogixConfig.ps1"
-                    },
+                    // {
+                    //     "type": "PowerShell",
+                    //     "name": "installFsLogix",
+                    //     "runElevated": true,
+                    //     "runAsSystem": true,
+                    //     "scriptUri": "https://raw.githubusercontent.com/tjsullivan1/tjs-scripts/master/PowerShell/Set-FsLogixConfig.ps1"
+                    // },
                     // {
                     //     "type": "PowerShell",
                     //     "name": "OptimizeOS",
@@ -163,7 +163,7 @@
             [
                 {   
                     "type": "SharedImage",
-                    "galleryImageId": "[parameters('sigId')]",
+                    "galleryImageId": "[parameters('acgId')]",
                     "runOutputName": "run-test",
                     "artifactTags": {
                         "source": "wvd11",
