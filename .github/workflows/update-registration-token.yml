@@ -24,7 +24,7 @@ jobs:
   runscript:
     runs-on: ubuntu-latest
     env:
-      HOST_POOL: ph-fdpo
+      HOST_POOL: hp-fdpo
       RESOURCE_GROUP: rg-avd-prod
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
