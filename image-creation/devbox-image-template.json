@@ -17,7 +17,7 @@
       },
       "sigId": {
           "type": "string",
-          "defaultValue": "/subscriptions/9dc23aa2-5815-46a5-9303-9aa5847aaf13/resourceGroups/rg-images/providers/Microsoft.Compute/galleries/acg01/images/devboximage"
+          "defaultValue": "/subscriptions/9dc23aa2-5815-46a5-9303-9aa5847aaf13/resourceGroups/rg-images/providers/Microsoft.Compute/galleries/acg01/images/tjsdevbox"
       }
     },
     "variables": {
