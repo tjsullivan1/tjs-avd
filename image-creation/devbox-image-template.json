@@ -1,0 +1,98 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+      "imageTemplateName": {
+        "type": "string"
+      },
+      "api-version": {
+        "type": "string"
+      },
+      "svclocation": {
+        "type": "string"
+      },
+      "userIdentity": {
+          "type": "string",
+          "defaultValue": "/subscriptions/8b63fe10-d76a-4f8f-81ce-7a5a8b911779/resourcegroups/rg-images/providers/Microsoft.ManagedIdentity/userAssignedIdentities/aibIdentity1615322949"
+      },
+      "sigId": {
+          "type": "string",
+          "defaultValue": "/subscriptions/8b63fe10-d76a-4f8f-81ce-7a5a8b911779/resourceGroups/rg-images/providers/Microsoft.Compute/galleries/sigseaib/images/se-wvd"
+      }
+    },
+    "variables": {
+        "runoutputname": "[concat('runOutput-', utcNow())]"
+    },
+    "resources": [
+      {
+        "name": "[parameters('imageTemplateName')]",
+        "type": "Microsoft.VirtualMachineImages/imageTemplates",
+        "apiVersion": "[parameters('api-version')]",
+        "location": "[parameters('svclocation')]",
+        "dependsOn": [],
+        "tags": {
+          "imagebuilderTemplate": "win11multi",
+          "userIdentity": "enabled"
+        },
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "[parameters('userIdentity')]": {}
+          }
+        },
+        "properties": {
+          "buildTimeoutInMinutes": 100,
+          "vmProfile": {
+            "vmSize": "Standard_D8_v3",
+            "osDiskSizeGB": 127
+          },
+        "source": {
+            "type": "PlatformImage",
+            "publisher": "MicrosoftWindowsDesktop",
+            "offer": "Windows-11",
+            "sku": "win11-21h2-avd",
+            "version": "latest"
+        },
+          "customize": [
+            {
+                "type": "PowerShell",
+                "name": "Install Choco and Vscode",
+                "inline": [
+                    "Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))",
+                    "choco install -y vscode"
+                ]
+            },
+            {
+                "type": "WindowsUpdate",
+                "searchCriteria": "IsInstalled=0",
+                "filters": [
+                    "exclude:$_.Title -like '*Preview*'",
+                    "include:$true"
+                ],
+                "updateLimit": 40
+            },
+            {
+                "type": "WindowsRestart",
+                "restartCheckCommand": "echo Azure-Image-Builder-Restarted-the-VM - post onedrive fix",
+                "restartTimeout": "5m"
+            }
+          ],
+          "distribute": 
+          [
+              {   
+                  "type": "SharedImage",
+                  "galleryImageId": "[parameters('sigId')]",
+                  "runOutputName": "[variables('runoutputname')]",
+                  "artifactTags": {
+                      "source": "azureVmImageBuilder",
+                      "baseosimg": "win11multi"
+                  },
+                  "replicationRegions": [
+                    "eastus"
+                  ]
+              }
+          ]
+        }
+      }
+    ]
+  }
