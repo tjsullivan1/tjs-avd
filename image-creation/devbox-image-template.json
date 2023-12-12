@@ -21,7 +21,7 @@
       }
     },
     "variables": {
-        "runoutputname": "[concat('runOutput-', utcNow())]"
+        "runoutputname": "imagebuilder1"
     },
     "resources": [
       {
